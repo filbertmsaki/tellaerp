@@ -51,14 +51,6 @@ var KTSignupGeneral = function () {
                         validators: {
                             notEmpty: {
                                 message: 'The password is required'
-                            },
-                            callback: {
-                                message: 'Please enter valid password',
-                                callback: function (input) {
-                                    if (input.value.length > 0) {
-                                        return validatePassword();
-                                    }
-                                }
                             }
                         }
                     },

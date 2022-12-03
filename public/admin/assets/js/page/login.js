@@ -86,8 +86,8 @@ var KTSigninGeneral = function () {
                                 if (result.isConfirmed) {
                                     form.querySelector('[name="email"]').value = "";
                                     form.querySelector('[name="password"]').value = "";
-                                    form.submit(); // submit form
-                                    window.location.reload();
+                                    // form.submit(); // submit form
+                                    // window.location.reload();
                                 }
                             });
                         },
@@ -106,7 +106,7 @@ var KTSigninGeneral = function () {
                             submitButton.removeAttribute('data-kt-indicator');
                             form.querySelector('[name="email"]').value = "";
                             form.querySelector('[name="password"]').value = "";
-                            window.location.reload();
+                            // window.location.reload();
                         }
                     });
 

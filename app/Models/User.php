@@ -9,9 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Laratrust\Traits\LaratrustUserTrait;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use LaratrustUserTrait;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -24,9 +27,15 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'id',
+        'username',
+        'first_name',
+        'last_name',
         'email',
+        'phone',
         'password',
+        'status',
+        'profile_photo_path',
     ];
 
     /**
@@ -58,4 +67,20 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
+    public $incrementing = false;
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->id = (string) Str::uuid();
+            $model->username = 'ID-' . date('Ymd') . time();
+            $model->first_name = ucwords(strtolower($model->first_name));
+            $model->last_name = ucwords(strtolower($model->last_name));
+        });
+        static::updating(function ($model) {
+            $model->first_name = ucwords(strtolower($model->first_name));
+            $model->last_name = ucwords(strtolower($model->last_name));
+        });
+    }
 }
