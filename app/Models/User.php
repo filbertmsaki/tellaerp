@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Laratrust\Traits\LaratrustUserTrait;
 use Illuminate\Support\Str;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use LaratrustUserTrait;
     use HasApiTokens;
@@ -26,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var string[]
      */
+
     protected $fillable = [
         'id',
         'username',
@@ -37,6 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'status',
         'profile_photo_path',
     ];
+    protected $table = 'users';
 
     /**
      * The attributes that should be hidden for serialization.

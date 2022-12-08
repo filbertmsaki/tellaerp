@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'admin', 'middleware' => [
-    'auth:sanctum',
+    'auth',
     config('jetstream.auth_session'),
     'verified'
 ]], function () {
